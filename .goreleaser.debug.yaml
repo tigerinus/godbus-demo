@@ -1,0 +1,58 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+project_name: godbus-demo
+before:
+  hooks:
+    - go mod tidy
+    - go test -v ./...
+builds:
+  - id: godbus-demo-amd64
+    binary: build/sysroot/usr/bin/godbus-demo
+    env:
+      - CGO_ENABLED=1
+      - CC=x86_64-linux-gnu-gcc
+    gcflags:
+      - all=-N -l
+    ldflags:
+      - -extldflags "-static"
+    tags:
+      - musl
+      - netgo
+    goos:
+      - linux
+    goarch:
+      - amd64
+  - id: godbus-demo-arm64
+    binary: build/sysroot/usr/bin/godbus-demo
+    env:
+      - CGO_ENABLED=1
+      - CC=aarch64-linux-gnu-gcc
+    gcflags:
+      - all=-N -l
+    ldflags:
+      - -extldflags "-static"
+    tags:
+      - musl
+      - netgo
+    goos:
+      - linux
+    goarch:
+      - arm64
+  - id: godbus-demo-arm-7
+    binary: build/sysroot/usr/bin/godbus-demo
+    env:
+      - CGO_ENABLED=1
+      - CC=arm-linux-gnueabihf-gcc
+    gcflags:
+      - all=-N -l
+    ldflags:
+      - -extldflags "-static"
+    tags:
+      - musl
+      - netgo
+    goos:
+      - linux
+    goarch:
+      - arm
+    goarm:
+      - "7"
