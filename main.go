@@ -19,7 +19,7 @@ func main() {
 	defer conn.Close()
 
 	matchRules := []string{
-		"path_namespace='/org/freedesktop/UDisks2'",
+		"path_namespace='/'",
 	}
 
 	var flag uint
